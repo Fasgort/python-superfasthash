@@ -1,5 +1,7 @@
 #! /usr/bin/python
 
+import binascii
+
 class uint32_t(int):
     def __rshift__(self, other):
         return uint32_t(int.__rshift__(self, other) & ((1 << 32) - 1))
@@ -10,10 +12,10 @@ class uint32_t(int):
     def __xor__(self, other):
         return uint32_t(int.__xor__(self, other) & ((1 << 32) - 1))
 
-def __get_16_bits(ptr):
-    return ord(ptr[0]) + (ord(ptr[1]) << 8)
+def __get_16_bits(data):
+    return int(binascii.hexlify(data[1::-1]), 16)
 
-def SuperFastHash(data, seed):
+def SuperFastHash(data):
     """
     Stream-adapted SuperFastHash algorithm from Paul Hsieh,
     http://www.azillionmonkeys.com/qed/hash.html
@@ -28,7 +30,7 @@ def SuperFastHash(data, seed):
     rem = len_ & 3
     len_ >>= 2
 
-    hash_ = uint32_t(seed)
+    hash_ = uint32_t(len(data))
 
     # Main loop
     while len_ > 0:

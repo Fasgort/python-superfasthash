@@ -2,9 +2,9 @@
 
 Pure python implementation of Paul Hsieh's [SuperFastHash algorithm](http://www.azillionmonkeys.com/qed/hash.html).
 
-* Stream-adapted: init the hash with any incremental seed
-* Dependency-agnostic: no python dependency whatsoever
-* As minimal as possible.
+# Fork
+
+Removed the incremental seed feature, and added a dependency to binascii to adapt the implementation to my own purposes.
 
 ## License
 
